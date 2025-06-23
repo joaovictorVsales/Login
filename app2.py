@@ -7,6 +7,9 @@ app.secret_key = 'Chave-secreta'
 USUARIO_CORRETO = 'Camilo'
 SENHA_CORRETA = 'Huxiaobestship'
 
+# Lista de produtos (frutas)
+produtos = ['Maçã', 'Banana', 'Laranja']
+
 @app.route('/')
 def home():
     return render_template('login.html')
@@ -18,15 +21,15 @@ def login():
 
     if username == USUARIO_CORRETO and password == SENHA_CORRETA:
         session['username'] = username
-        return redirect(url_for('profile'))
+        return redirect(url_for('produto'))
     else:
         return '<h2>Usuário ou senha incorreta. Tente novamente.</h2>'
 
 @app.route('/produto')
-def profile():
+def produto():
     if 'username' in session:
         username = session['username']
-        return render_template('produto.html', username=username)
+        return render_template('produto.html', username=username, produtos=produtos)
     else:
         return redirect(url_for('home'))
 
