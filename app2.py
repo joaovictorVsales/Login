@@ -18,15 +18,15 @@ def login():
 
     if username == USUARIO_CORRETO and password == SENHA_CORRETA:
         session['username'] = username
-        return redirect(url_for('produto.html'))
+        return redirect(url_for('profile'))
     else:
-        return '<h2>Usuário ou senha incorreta, tente novamente.</h2>'
+        return '<h2>Usuário ou senha incorreta. Tente novamente.</h2>'
 
 @app.route('/produto')
 def profile():
     if 'username' in session:
         username = session['username']
-        return f'<h2>Bem-vindo ao perfil, {username}!</h2>'
+        return render_template('produto.html', username=username)
     else:
         return redirect(url_for('home'))
 
